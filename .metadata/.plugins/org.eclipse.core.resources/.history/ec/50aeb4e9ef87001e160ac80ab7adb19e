@@ -1,0 +1,5 @@
+package com.countryservice.demo.repositories;
+
+public interface CountryRepository {
+
+}

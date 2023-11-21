@@ -1,0 +1,24 @@
+package com.countryservice.demo.services;
+
+import java.util.HashMap;
+
+import com.countryservice.demo.beans.Country;
+
+public class CountryService {
+	
+	static HashMap<Integer,Country> countryIdMap;
+	
+	
+	public CountryService() {
+		
+		Country indiaCountry = new Country(1,"India" , "Delhi");
+		Country usaCountry = new Country(1,"India" , "Delhi");
+		Country ukCountry = new Country(1,"India" , "Delhi");
+		
+		countryIdMap.put(1, indiaCountry);
+		countryIdMap.put(2, usaCountry);
+		countryIdMap.put(2, ukCountry);
+		
+	}
+
+}

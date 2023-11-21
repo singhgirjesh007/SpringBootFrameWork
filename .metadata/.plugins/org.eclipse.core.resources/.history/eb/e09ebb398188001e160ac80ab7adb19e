@@ -1,0 +1,68 @@
+package com.countryservice.demo;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.countryservice.demo.beans.Country;
+import com.countryservice.demo.repositories.CountryRepository;
+import com.countryservice.demo.services.CountryService;
+
+/**
+ * SpringBootTest annotation is used to specify Test class
+ * Mock annotation is for the class funtions are going to use (external dependency)
+ * InjectMock used for class which is going to use Mock 
+ */
+
+
+
+@SpringBootTest
+public class ServiceMockitoTest {
+	
+	@Mock
+	CountryRepository countryrepo;
+	
+	@InjectMocks
+	CountryService countryService;
+	
+	@Test
+	@Order(1)
+	public void test_getAllcountries() {
+		
+		List<Country> myCountries = new ArrayList<Country>();
+		myCountries.add(new Country(1,"India","Delhi"));
+		myCountries.add(new Country(6,"Brazil","Delhi"));
+		
+		when(countryrepo.findAll()).thenReturn(myCountries); //Mocking
+		
+		
+		assertEquals(2, countryService.getAllCountries().size());
+		
+	}
+	
+	@Test
+	@Order(2)
+	public void test_getCountryByID() {
+		List<Country> myCountries = new ArrayList<Country>();
+		myCountries.add(new Country(1,"India","Delhi"));
+		myCountries.add(new Country(6,"Brazil","Delhi"));
+		int id =1;
+		
+		when(countryrepo.findAll()).thenReturn(myCountries);
+		assertEquals(1,countryService.getCountryById(id).getId());
+		
+	}
+	
+	
+	
+	
+
+}
